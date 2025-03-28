@@ -1,0 +1,57 @@
+local UserInputService = game:GetService("UserInputService")
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local camera = workspace.CurrentCamera
+
+local isEnabled = false
+local currentMaxZoom = player.CameraMaxZoomDistance
+local defaultMaxZoom = 100
+
+local function onMouseWheel(input, gameProcessed)
+    if not isEnabled or gameProcessed then return end
+    
+    if input.UserInputType == Enum.UserInputType.MouseWheel then
+        local currentZoom = (camera.CFrame.Position - camera.Focus.Position).Magnitude
+        
+        if input.Position.Z < 0 then
+            if currentZoom >= currentMaxZoom * 0.9 then
+                currentMaxZoom = currentMaxZoom * 1.5
+                player.CameraMaxZoomDistance = currentMaxZoom
+            end
+        end
+    end
+end
+
+local function onKeyPress(input, gameProcessed)
+    if gameProcessed then return end
+    
+    if input.KeyCode == Enum.KeyCode. E then
+        isEnabled = not isEnabled
+        
+        if isEnabled then
+            player.CameraMaxZoomDistance = currentMaxZoom
+            game:GetService("StarterGui"):SetCore("SendNotification", {
+                Title = "Infinite Zoom by woo6671",
+                Text = "줌제한이 제거되었습니다",
+                Duration = 3
+            })
+        else
+            player.CameraMaxZoomDistance = defaultMaxZoom
+            currentMaxZoom = defaultMaxZoom
+            game:GetService("StarterGui"):SetCore("SendNotification", {
+                Title = "Infinite Zoom by woo6671",
+                Text = "줌제한이 생성 되었습니다",
+                Duration = 3
+            })
+        end
+    end
+end
+
+UserInputService.InputChanged:Connect(onMouseWheel)
+UserInputService.InputBegan:Connect(onKeyPress)
+
+game:GetService("StarterGui"):SetCore("SendNotification", {
+    Title = "Infinite Zoom by woo6671",
+    Text = "E키를 눌러서 줌제한을 제거하세요!",
+    Duration = 5
+})
