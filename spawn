@@ -1,0 +1,26 @@
+local player = game.Players.LocalPlayer
+local deathPosition = nil
+
+local function onCharacterAdded(character)
+    local rootPart = character:WaitForChild("HumanoidRootPart", 10)
+    local humanoid = character:WaitForChild("Humanoid", 10)
+
+    if humanoid and rootPart then
+        humanoid.Died:Connect(function()
+            deathPosition = rootPart.Position
+            player.CharacterAdded:Wait()
+            local newCharacter = player.Character or player.CharacterAdded:Wait()
+            local newRootPart = newCharacter:WaitForChild("HumanoidRootPart", 10)
+
+            if newRootPart and deathPosition then
+                newRootPart.CFrame = CFrame.new(deathPosition)
+            end
+        end)
+    end
+end
+
+if player.Character then
+    onCharacterAdded(player.Character)
+end
+
+player.CharacterAdded:Connect(onCharacterAdded)
