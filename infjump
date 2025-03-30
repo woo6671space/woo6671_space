@@ -1,0 +1,17 @@
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+local canJump = true
+local jumpCooldown = 0.2
+
+local function onJumpRequest()
+	if canJump then
+		humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+		canJump = false
+		task.wait(jumpCooldown)
+		canJump = true
+	end
+end
+
+game:GetService("UserInputService").JumpRequest:Connect(onJumpRequest)
