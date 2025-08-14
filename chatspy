@@ -40,7 +40,7 @@ if hidden and Config.enabled then
 if Config.public then
 saymsg:FireServer((Config.publicItalics and "/me " or '').."{woo6671 SPY} [".. p.Name .."]: "..msg,"All")
 else
-PrivateProperties.Text = "{woo6671 SPY} [".. p.Name .."]: "..msg
+PrivateProperties.Text = "{Woo6671 SPY} [".. p.Name .."]: "..msg
 StarterGui:SetCore("ChatMakeSystemMessage", PrivateProperties)
 end
 end
