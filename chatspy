@@ -38,7 +38,7 @@ wait(1)
 conn:Disconnect()
 if hidden and Config.enabled then
 if Config.public then
-saymsg:FireServer((Config.publicItalics and "/me " or '').."{woo6671 SPY} [".. p.Name .."]: "..msg,"All")
+saymsg:FireServer((Config.publicItalics and "/me " or '').."{Woo6671 SPY} [".. p.Name .."]: "..msg,"All")
 else
 PrivateProperties.Text = "{Woo6671 SPY} [".. p.Name .."]: "..msg
 StarterGui:SetCore("ChatMakeSystemMessage", PrivateProperties)
