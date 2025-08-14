@@ -5,7 +5,6 @@ local function flickCamera90Degrees()
     local initialPos = currentCam.CFrame.Position
     local initialRot = currentCam.CFrame - initialPos
     currentCam.CFrame = CFrame.new(initialPos) * CFrame.Angles(0, math.rad(90), 0) * initialRot  -- Rotate the camera by 90 degrees around the Y-axis while maintaining the position and orientation
-    print("카메라가 돌아갔습니다!")
 end
  
 local function flickCameraBack90Degrees()
@@ -13,7 +12,6 @@ local function flickCameraBack90Degrees()
     local initialPos = currentCam.CFrame.Position
     local initialRot = currentCam.CFrame - initialPos
     currentCam.CFrame = CFrame.new(initialPos) * CFrame.Angles(0, math.rad(-90), 0) * initialRot  -- Rotate the camera back by -90 degrees around the Y-axis while maintaining the position and orientation
-    print("다시 카메라가 돌아갔습니다!")
 end
  
 local function flickCameraSequence()
